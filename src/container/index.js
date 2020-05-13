@@ -1,4 +1,5 @@
-import { getRandomLow, getRandomUp, getRandomNum, getRandomSym } from './generators';
+const electron = require("electron");
+const { getRandomLow, getRandomUp, getRandomNum, getRandomSym } = require('./passwordGenerator/generators');
 
 const resultEl = document.getElementById('result');
 const lengthEl = document.getElementById('length');
@@ -14,11 +15,31 @@ const randomFunc = {
   upper: getRandomUp,
   number: getRandomNum,
   symbol: getRandomSym
-}
+};
 
-// clipboard event listener
+clipboard.addEventListener('click', () => {
+	const textarea = document.createElement('textarea');
+	const password = resultEl.innerText;
+	
+	if(!password) { return; }
+	
+	textarea.value = password;
+	document.body.appendChild(textarea);
+	textarea.select();
+	document.execCommand('copy');
+	textarea.remove();
+	alert('Password copied to clipboard');
+});
 
-// generate btn listener
+generate.addEventListener('click', () => {
+	const length = +lengthEl.value;
+	const hasLower = lowercaseEl.checked;
+	const hasUpper = uppercaseEl.checked;
+	const hasNumber = numbersEl.checked;
+	const hasSymbol = symbolsEl.checked;
+	
+	resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+});
 
 const generatePassword = (lower, upper, number, symbol, length) => {
   console.log('RUNNING');
