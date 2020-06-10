@@ -42,7 +42,6 @@ generate.addEventListener('click', () => {
 });
 
 const generatePassword = (lower, upper, number, symbol, length) => {
-  console.log('RUNNING');
   let generatedPassword = '';
   const typesCount = lower + upper + number + symbol;
   const typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);

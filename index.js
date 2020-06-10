@@ -12,7 +12,6 @@ const createWindow = () => {
   });
 
   window.loadFile('./src/index.html');
-  window.webContents.openDevTools()
 };
 
 app.whenReady().then(createWindow);
